@@ -1,0 +1,25 @@
+{
+  "name": "hypto",
+  "version": "1.0.0",
+  "description": "synergy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src",
+    "dev": "nodemon -w src --exec \"babel-node src --presets env\"",
+    "build": "babel src -d lib"
+  },
+  "author": "Brett Grigsby",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "nodemon": "^1.17.2"
+  }
+}
