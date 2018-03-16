@@ -1,6 +1,9 @@
 {
   "name": "hypto",
   "version": "1.0.0",
+  "engines": {
+    "node": "9.4.0"
+  },
   "description": "synergy",
   "main": "index.js",
   "scripts": {
