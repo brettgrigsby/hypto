@@ -1,13 +1,18 @@
 import "babel-core/register";
 import "babel-polyfill";
 import express from 'express';
-import getBook from './modules/bittrex/api';
-import bittrex from './modules/bittrex/index';
 import cors from 'cors';
+
+import bittrex from './modules/bittrex/index';
+import poloniex from './modules/poloniex/index';
+import Combotron from './modules/combotron/index';
 
 const app = express()
 
 bittrex.poll();
+poloniex.poll();
+
+const combotron = new Combotron({bittrex, poloniex});
 
 const corsOptions = {
   allowedHeaders: ['Origin', 'Authorization', 'Content-Type', 'Accept', 'Cache-Control'],
@@ -20,7 +25,7 @@ app.use(cors(corsOptions));
 app.get('/orderBooks', async (req, res) => {
   try {
     const market = req.query.market || 'BTC-LTC';
-    const book = bittrex.getBookFor(market);
+    const book = combotron.getBookFor(market);
     res.send({book});
   } catch (error) {
     console.log({error})
