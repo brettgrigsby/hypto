@@ -36,4 +36,6 @@ app.get('/volume', async (req, res) => {
   }
 });
 
-app.listen(9000, () => console.log('Listening on port 9000'))
+var port = process.env.PORT || 9000;
+
+app.listen(port, () => console.log('Listening on port 9000'))
