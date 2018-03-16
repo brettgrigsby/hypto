@@ -1,3 +1,5 @@
+import "babel-core/register";
+import "babel-polyfill";
 import express from 'express';
 import getBook from './modules/bittrex/api';
 import bittrex from './modules/bittrex/index';
@@ -5,7 +7,7 @@ import cors from 'cors';
 
 const app = express()
 
-bittrex.pollBook();
+bittrex.poll();
 
 const corsOptions = {
   allowedHeaders: ['Origin', 'Authorization', 'Content-Type', 'Accept', 'Cache-Control'],
@@ -17,8 +19,8 @@ app.use(cors(corsOptions));
 
 app.get('/orderBooks', async (req, res) => {
   try {
-    const { market } = req.query;
-    const { book } = bittrex;
+    const market = req.query.market || 'BTC-LTC';
+    const book = bittrex.getBookFor(market);
     res.send({book});
   } catch (error) {
     console.log({error})
@@ -27,7 +29,8 @@ app.get('/orderBooks', async (req, res) => {
 
 app.get('/volume', async (req, res) => {
   try {
-    res.send({volume: bittrex.getVolume()})
+    const market = req.query.market || 'BTC-LTC';
+    res.send({volume: bittrex.getVolumeFor(market)})
   } catch (error) {
     console.log(error);
   }

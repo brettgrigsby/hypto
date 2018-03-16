@@ -4,8 +4,8 @@ const bittrexApi = axios.create({
   baseURL: 'https://bittrex.com/api/v1.1/public'
 });
 
-function getAsks() {
-  return bittrexApi.get(`/getorderbook?market=BTC-LTC&type=sell`)
+function getAsks(market) {
+  return bittrexApi.get(`/getorderbook?market=${market}&type=sell`)
     .then( function(response) {
       return response.data.result;
     })
@@ -14,8 +14,8 @@ function getAsks() {
     });
 }
 
-function getBids() {
-  return bittrexApi.get(`/getorderbook?market=BTC-LTC&type=buy`)
+function getBids(market) {
+  return bittrexApi.get(`/getorderbook?market=${market}&type=buy`)
     .then( function(response) {
       return response.data.result;
     })
@@ -24,4 +24,4 @@ function getBids() {
     });
 }
 
-export { getAsks, getBids };
+export default { getAsks, getBids };
