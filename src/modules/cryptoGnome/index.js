@@ -3,7 +3,7 @@ class CryptoGnome {
     this.api = api;
     this.books = {};
     this.volumes = {};
-    this.markets = ['BTC-LTC']
+    this.markets = ['BTC-LTC', 'BTC-ETH']
   }
 
   getBookFor(market) {
@@ -39,9 +39,10 @@ class CryptoGnome {
   }
 
   ordersToVolume(orders) {
+    if (!orders) { return {} };
     return orders.reduce((acc, item) => {
       const { Quantity, Rate } = item;
-      const roundedKey = Math.round(Rate * 10000) / 10000;
+      const roundedKey = Math.round(Rate * 1000) / 1000;
       acc[roundedKey] = acc[roundedKey] ? acc[roundedKey] + Quantity : Quantity;
       return acc;
     }, {})

@@ -1,16 +1,16 @@
 import axios from 'axios';
 
 const marketMap = {
-  'BTC-ETH': 'BTC_ETH',
-  'BTC-LTC': 'BTC_LTC'
+  'BTC-ETH': 'ETHBTC',
+  'BTC-LTC': 'LTCBTC'
 }
 
-const poloniexApi = axios.create({
-  baseURL: 'https://poloniex.com'
+const bitfinexApi = axios.create({
+  baseURL: 'https://api.bitfinex.com'
 });
 
 function getBook(market) {
-  return poloniexApi.get(`/public?command=returnOrderBook&currencyPair=${marketMap[market]}&depth=10000`)
+  return bitfinexApi.get(`/v1/book/${marketMap[market]}?limit_bids=2000&limit_asks=2000`)
     .then( function(response) {
       return response.data;
     })
