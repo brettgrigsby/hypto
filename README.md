@@ -8,14 +8,16 @@ Initially I thought that grabbing the entire order book for each exchange on a r
 
 ## Endpoints
 
-Hytpo has only 2 endpoints:
+Hypto has only 2 endpoints
 
-Combined Order Books:
+Combined Order Books:  
+
 `/orderBooks?market=<market>&exchanges=<exchanges>`
 
 and
 
-Combined Volume:
+Combined Volume:  
+
 `/volume?market=<market>&exchanges=<exchanges>`
 
 for both endpoints, `market` and `exchanges` are required url params.
